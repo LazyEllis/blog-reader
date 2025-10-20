@@ -37,3 +37,7 @@ const request = async (endpoint, options = {}) => {
 };
 
 export const listPosts = () => request("/posts");
+
+export const getPost = (id) => request(`/posts/${id}`);
+
+export const getPostComments = (postId) => request(`/posts/${postId}/comments`);
