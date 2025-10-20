@@ -42,6 +42,8 @@ export const generateToken = (credentials) =>
 export const createUser = (userData) =>
   request("/users", { method: "POST", body: JSON.stringify(userData) });
 
+export const getProfile = () => request("/users/me");
+
 export const listPosts = () => request("/posts");
 
 export const getPost = (id) => request(`/posts/${id}`);
