@@ -36,6 +36,12 @@ const request = async (endpoint, options = {}) => {
   }
 };
 
+export const generateToken = (credentials) =>
+  request("/auth/token", { method: "POST", body: JSON.stringify(credentials) });
+
+export const createUser = (userData) =>
+  request("/users", { method: "POST", body: JSON.stringify(userData) });
+
 export const listPosts = () => request("/posts");
 
 export const getPost = (id) => request(`/posts/${id}`);
