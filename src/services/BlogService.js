@@ -17,23 +17,19 @@ const request = async (endpoint, options = {}) => {
     headers,
   };
 
-  try {
-    const response = await fetch(url, config);
+  const response = await fetch(url, config);
 
-    if (response.status === 204) {
-      return null;
-    }
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw data.errors || new Error(data.message);
-    }
-
-    return data;
-  } catch (error) {
-    throw error.errors || new Error(error.message);
+  if (response.status === 204) {
+    return null;
   }
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw data.errors || new Error(data.message);
+  }
+
+  return data;
 };
 
 export const generateToken = (credentials) =>
