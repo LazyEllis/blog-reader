@@ -1,25 +1,30 @@
 import { useParams } from "react-router-dom";
-import { format, formatDistanceToNow } from "date-fns";
+import { format } from "date-fns";
 import { useQuery } from "../hooks/useQuery";
 import { getPost, getPostComments } from "../services/BlogService";
+import CommentSection from "../components/CommentSection";
 
 const Post = () => {
   const { id } = useParams();
   const {
     data: post,
     error: postError,
-    isLoading: isPostLoading,
+    isLoading: isLoadingPost,
   } = useQuery({ queryFn: () => getPost(id) });
   const {
     data: comments,
     error: commentsError,
     isLoading: areCommentsLoading,
+    setData: setComments,
   } = useQuery({ queryFn: () => getPostComments(id) });
 
-  if (isPostLoading || areCommentsLoading) return <div>Loading...</div>;
+  const handleCommentCreate = (comment) => {
+    setComments([comment, ...comments]);
+  };
 
-  if (postError || commentsError)
-    return <div>{postError.message || commentsError.message}</div>;
+  if (isLoadingPost) return <div>Loading...</div>;
+
+  if (postError) return <div>{postError.message}</div>;
 
   return (
     <>
@@ -32,28 +37,12 @@ const Post = () => {
         </div>
         <p>{post.content}</p>
       </article>
-      <div>
-        <h2>Comments</h2>
-        <div>
-          {comments.error ? (
-            <div>{commentsError.message}</div>
-          ) : (
-            comments.map((comment) => (
-              <div key={comment.id}>
-                <div>
-                  <div>{comment.author.name}</div>
-                  <div>
-                    {formatDistanceToNow(comment.createdAt, {
-                      addSuffix: true,
-                    })}
-                  </div>
-                </div>
-                <div>{comment.content}</div>
-              </div>
-            ))
-          )}
-        </div>
-      </div>
+      <CommentSection
+        comments={comments}
+        error={commentsError}
+        isLoading={areCommentsLoading}
+        onCreate={handleCommentCreate}
+      />
     </>
   );
 };

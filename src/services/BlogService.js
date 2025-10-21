@@ -45,3 +45,9 @@ export const listPosts = () => request("/posts");
 export const getPost = (id) => request(`/posts/${id}`);
 
 export const getPostComments = (postId) => request(`/posts/${postId}/comments`);
+
+export const createPostComment = ({ postId, commentData }) =>
+  request(`/posts/${postId}/comments`, {
+    method: "POST",
+    body: JSON.stringify(commentData),
+  });
