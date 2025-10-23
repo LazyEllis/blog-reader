@@ -1,0 +1,23 @@
+@font-face {
+  font-display: swap;
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../assets/playfair-display-v40-latin-700.woff2") format("woff2");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../assets/inter-v20-latin-regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../assets/inter-v20-latin-700.woff2") format("woff2");
+}
