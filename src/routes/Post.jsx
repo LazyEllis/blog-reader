@@ -30,6 +30,10 @@ const Post = () => {
     );
   };
 
+  const handleCommentDelete = (deletedComment) => {
+    setComments(comments.filter((comment) => comment.id !== deletedComment.id));
+  };
+
   if (isLoadingPost) return <div>Loading...</div>;
 
   if (postError) return <div>{postError.message}</div>;
@@ -51,6 +55,7 @@ const Post = () => {
         isLoading={areCommentsLoading}
         onCreate={handleCommentCreate}
         onUpdate={handleCommentUpdate}
+        onDelete={handleCommentDelete}
       />
     </>
   );

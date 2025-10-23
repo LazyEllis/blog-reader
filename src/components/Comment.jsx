@@ -1,15 +1,19 @@
 import { useOutletContext, useParams } from "react-router-dom";
 import { formatDistanceToNow } from "date-fns";
 import { useMutation } from "../hooks/useMutation";
-import { updatePostComment } from "../services/BlogService";
+import { deletePostComment, updatePostComment } from "../services/BlogService";
 import CommentForm from "./CommentForm";
+import ErrorAlert from "./ErrorAlert";
 
 const Comment = ({
   comment,
   onSelectUpdate,
+  onSelectDelete,
   onCancel,
   onUpdate,
+  onDelete,
   isUpdating,
+  isDeleting,
 }) => {
   const { id } = useParams();
   const { user } = useOutletContext();
@@ -22,12 +26,24 @@ const Comment = ({
     },
   });
 
+  const deleteComment = useMutation({
+    mutationFn: deletePostComment,
+    onSuccess: () => {
+      onDelete(comment);
+      onCancel();
+    },
+  });
+
   const handleUpdate = (content) => {
     updateComment.mutate({
       postId: id,
       commentId: comment.id,
       commentData: { content },
     });
+  };
+
+  const handleDelete = () => {
+    deleteComment.mutate({ postId: id, commentId: comment.id });
   };
 
   if (isUpdating) {
@@ -55,7 +71,27 @@ const Comment = ({
       {user?.id === comment.author.id && (
         <div>
           <button onClick={onSelectUpdate}>Edit</button>
+          <button onClick={onSelectDelete}>Delete</button>
         </div>
+      )}
+      {isDeleting && (
+        <dialog open>
+          <h3>Delete comment</h3>
+
+          <p>
+            Are you sure you want to delete this comment? This action cannot be
+            undone.
+          </p>
+
+          {deleteComment.error && <ErrorAlert errors={deleteComment.error} />}
+
+          <div>
+            <button onClick={onCancel}>Cancel</button>
+            <button onClick={handleDelete} disabled={deleteComment.isLoading}>
+              Delete
+            </button>
+          </div>
+        </dialog>
       )}
     </div>
   );

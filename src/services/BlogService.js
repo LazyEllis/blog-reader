@@ -57,3 +57,6 @@ export const updatePostComment = ({ postId, commentId, commentData }) =>
     method: "PUT",
     body: JSON.stringify(commentData),
   });
+
+export const deletePostComment = ({ postId, commentId }) =>
+  request(`/posts/${postId}/comments/${commentId}`, { method: "DELETE" });

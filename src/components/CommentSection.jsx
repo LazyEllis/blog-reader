@@ -6,7 +6,14 @@ import { createPostComment } from "../services/BlogService";
 import CommentForm from "./CommentForm";
 import Comment from "./Comment";
 
-const CommentSection = ({ comments, error, isLoading, onCreate, onUpdate }) => {
+const CommentSection = ({
+  comments,
+  error,
+  isLoading,
+  onCreate,
+  onUpdate,
+  onDelete,
+}) => {
   const { token } = useToken();
   const { id } = useParams();
 
@@ -68,11 +75,19 @@ const CommentSection = ({ comments, error, isLoading, onCreate, onUpdate }) => {
             onSelectUpdate={() =>
               setSelectedCommentStatus({ id: comment.id, status: "updating" })
             }
+            onSelectDelete={() =>
+              setSelectedCommentStatus({ id: comment.id, status: "deleting" })
+            }
             onCancel={handleCancel}
             onUpdate={onUpdate}
+            onDelete={onDelete}
             isUpdating={
               selectedCommentStatus.id === comment.id &&
               selectedCommentStatus.status === "updating"
+            }
+            isDeleting={
+              selectedCommentStatus.id === comment.id &&
+              selectedCommentStatus.status === "deleting"
             }
             key={comment.id}
           />
