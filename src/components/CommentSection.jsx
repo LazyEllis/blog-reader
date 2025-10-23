@@ -1,13 +1,23 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { formatDistanceToNow } from "date-fns";
 import { useToken } from "../hooks/useToken";
 import { useMutation } from "../hooks/useMutation";
 import { createPostComment } from "../services/BlogService";
 import CommentForm from "./CommentForm";
+import Comment from "./Comment";
 
-const CommentSection = ({ comments, error, isLoading, onCreate }) => {
+const CommentSection = ({ comments, error, isLoading, onCreate, onUpdate }) => {
   const { token } = useToken();
   const { id } = useParams();
+
+  const [selectedCommentStatus, setSelectedCommentStatus] = useState({
+    id: null,
+    status: null,
+  });
+
+  const handleCancel = () => {
+    setSelectedCommentStatus({ id: null, status: null });
+  };
 
   const createComment = useMutation({
     mutationFn: createPostComment,
@@ -53,17 +63,19 @@ const CommentSection = ({ comments, error, isLoading, onCreate }) => {
 
       <div>
         {comments.map((comment) => (
-          <div key={comment.id}>
-            <div>
-              <div>{comment.author.name}</div>
-              <div>
-                {formatDistanceToNow(comment.createdAt, {
-                  addSuffix: true,
-                })}
-              </div>
-            </div>
-            <div>{comment.content}</div>
-          </div>
+          <Comment
+            comment={comment}
+            onSelectUpdate={() =>
+              setSelectedCommentStatus({ id: comment.id, status: "updating" })
+            }
+            onCancel={handleCancel}
+            onUpdate={onUpdate}
+            isUpdating={
+              selectedCommentStatus.id === comment.id &&
+              selectedCommentStatus.status === "updating"
+            }
+            key={comment.id}
+          />
         ))}
       </div>
     </div>

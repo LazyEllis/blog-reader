@@ -22,6 +22,14 @@ const Post = () => {
     setComments([comment, ...comments]);
   };
 
+  const handleCommentUpdate = (updatedComment) => {
+    setComments(
+      comments.map((comment) =>
+        comment.id === updatedComment.id ? updatedComment : comment,
+      ),
+    );
+  };
+
   if (isLoadingPost) return <div>Loading...</div>;
 
   if (postError) return <div>{postError.message}</div>;
@@ -42,6 +50,7 @@ const Post = () => {
         error={commentsError}
         isLoading={areCommentsLoading}
         onCreate={handleCommentCreate}
+        onUpdate={handleCommentUpdate}
       />
     </>
   );

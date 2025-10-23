@@ -51,3 +51,9 @@ export const createPostComment = ({ postId, commentData }) =>
     method: "POST",
     body: JSON.stringify(commentData),
   });
+
+export const updatePostComment = ({ postId, commentId, commentData }) =>
+  request(`/posts/${postId}/comments/${commentId}`, {
+    method: "PUT",
+    body: JSON.stringify(commentData),
+  });

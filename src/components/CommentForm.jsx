@@ -1,8 +1,8 @@
 import { useState } from "react";
 import ErrorAlert from "./ErrorAlert";
 
-const CommentForm = ({ mutate, error, isLoading }) => {
-  const [content, setContent] = useState("");
+const CommentForm = ({ mutate, error, isLoading, comment }) => {
+  const [content, setContent] = useState(comment?.content || "");
 
   const handleChange = (e) => {
     setContent(e.target.value);
@@ -14,7 +14,7 @@ const CommentForm = ({ mutate, error, isLoading }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    mutate(content, handleReset);
+    comment ? mutate(content) : mutate(content, handleReset);
   };
 
   return (
@@ -23,17 +23,19 @@ const CommentForm = ({ mutate, error, isLoading }) => {
 
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="comment">Send a comment</label>
+          <label htmlFor={comment ? "comment-edit" : "comment-create"}>
+            {comment ? "Edit this comment" : "Send a comment"}
+          </label>
           <textarea
             name="content"
-            id="comment"
+            id={comment ? "comment-edit" : "comment-create"}
             required
             value={content}
             onChange={handleChange}
           />
         </div>
         <button type="submit" disabled={isLoading}>
-          Send
+          {comment ? "Edit" : "Send"}
         </button>
       </form>
     </div>

@@ -57,7 +57,7 @@ const Layout = () => {
         </nav>
       </header>
       <main>
-        <Outlet />
+        <Outlet context={{ user }} />
       </main>
     </>
   );
