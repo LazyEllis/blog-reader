@@ -21,3 +21,14 @@
   font-weight: 700;
   src: url("../assets/inter-v20-latin-700.woff2") format("woff2");
 }
+
+:root {
+  --spacing: 0.25rem;
+  --color-base: #fff;
+  --color-text: #000;
+  --color-accent: #6b6b6b;
+}
+
+body {
+  font-family: "Inter";
+}
