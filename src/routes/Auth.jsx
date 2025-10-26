@@ -5,6 +5,7 @@ import { useToken } from "../hooks/useToken";
 import { createUser, generateToken } from "../services/BlogService";
 import Input from "../components/Input";
 import ErrorAlert from "../components/ErrorAlert";
+import styles from "../styles/Auth.module.css";
 
 const signInFields = [
   { label: "Email", name: "email", type: "email" },
@@ -66,37 +67,43 @@ const Auth = ({ isSignUp }) => {
   }
 
   return (
-    <main>
-      <h1>{isSignUp ? "Sign up" : "Sign in"}</h1>
+    <main className={styles.container}>
+      <h1 className={styles.heading}>{isSignUp ? "Sign up" : "Sign in"}</h1>
 
-      {error && <ErrorAlert errors={error} />}
+      <div className={styles.formContainer}>
+        {error && <ErrorAlert errors={error} />}
 
-      <form onSubmit={handleSubmit}>
-        {fields.map(({ label, name, type }) => (
-          <Input
-            key={name}
-            label={label}
-            name={name}
-            type={type}
-            value={formData[name]}
-            onChange={handleChange}
-          />
-        ))}
+        <form onSubmit={handleSubmit}>
+          {fields.map(({ label, name, type }) => (
+            <Input
+              key={name}
+              label={label}
+              name={name}
+              type={type}
+              value={formData[name]}
+              onChange={handleChange}
+            />
+          ))}
 
-        <button type="submit" disabled={isLoading}>
-          {isSignUp ? "Sign up" : "Sign in"}
-        </button>
-      </form>
+          <button
+            type="submit"
+            disabled={isLoading}
+            className={styles.submitButton}
+          >
+            {isSignUp ? "Sign up" : "Sign in"}
+          </button>
+        </form>
 
-      {isSignUp ? (
-        <p>
-          Already have an account? <Link to="/sign-in">Sign in</Link>
-        </p>
-      ) : (
-        <p>
-          Don't have an account? <Link to="/sign-up">Sign up</Link>
-        </p>
-      )}
+        {isSignUp ? (
+          <p className={styles.message}>
+            Already have an account? <Link to="/sign-in">Sign in</Link>
+          </p>
+        ) : (
+          <p className={styles.message}>
+            Don't have an account? <Link to="/sign-up">Sign up</Link>
+          </p>
+        )}
+      </div>
     </main>
   );
 };

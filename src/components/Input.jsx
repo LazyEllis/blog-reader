@@ -1,6 +1,10 @@
+import styles from "../styles/Input.module.css";
+
 const Input = ({ label, type, name, value, onChange }) => (
-  <div>
-    <label htmlFor={name}>{label}</label>
+  <div className={styles.container}>
+    <label htmlFor={name} className={styles.label}>
+      {label}
+    </label>
     <input
       type={type}
       name={name}
@@ -8,6 +12,7 @@ const Input = ({ label, type, name, value, onChange }) => (
       value={value}
       onChange={onChange}
       required
+      className={styles.input}
     />
   </div>
 );
