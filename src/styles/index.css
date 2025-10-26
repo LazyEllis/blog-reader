@@ -27,6 +27,8 @@
   --color-base: #fff;
   --color-text: #000;
   --color-accent: #6b6b6b;
+  --color-action: #1a8917;
+  --color-action-hover: #156d12;
 }
 
 body {

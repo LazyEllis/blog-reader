@@ -1,4 +1,4 @@
-import Layout from "./components/Layout";
+import Layout from "./routes/Layout";
 import Auth from "./routes/Auth";
 import Home from "./routes/Home";
 import Post from "./routes/Post";
