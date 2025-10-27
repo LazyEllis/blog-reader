@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
+import { MessageCircle } from "lucide-react";
 import { format } from "date-fns";
 import { useQuery } from "../hooks/useQuery";
 import { listPosts } from "../services/BlogService";
+import styles from "../styles/Home.module.css";
 
 const Home = () => {
   const { data: posts, error, isLoading } = useQuery({ queryFn: listPosts });
@@ -12,18 +14,22 @@ const Home = () => {
 
   return (
     <>
-      <h1>Posts</h1>
-      <div>
+      <div className={styles.header}>
+        <h1 className={styles.heading}>Posts</h1>
+      </div>
+      <div className={styles.container}>
         {posts.map((post) => (
-          <article key={post.id}>
+          <article className={styles.post} key={post.id}>
             <div>
               <Link to={`/posts/${post.id}`}>
-                <h2>{post.title}</h2>
+                <h2 className={styles.postTitle}>{post.title}</h2>
               </Link>
             </div>
-            <div>
+            <div className={styles.metadata}>
               <div>{format(post.createdAt, "MMM d, y")}</div>
-              <div>{post._count.comments}</div>
+              <div className={styles.iconData}>
+                <MessageCircle size={16} /> {post._count.comments}
+              </div>
             </div>
           </article>
         ))}
