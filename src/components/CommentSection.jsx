@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { TriangleAlert } from "lucide-react";
 import { useToken } from "../hooks/useToken";
 import { useMutation } from "../hooks/useMutation";
 import { createPostComment } from "../services/BlogService";
 import CommentForm from "./CommentForm";
 import Comment from "./Comment";
+import Alert from "./Alert";
+import styles from "../styles/CommentSection.module.css";
 
 const CommentSection = ({
   comments,
@@ -13,6 +16,7 @@ const CommentSection = ({
   onCreate,
   onUpdate,
   onDelete,
+  className = null,
 }) => {
   const { token } = useToken();
   const { id } = useParams();
@@ -51,8 +55,8 @@ const CommentSection = ({
   }
 
   return (
-    <div>
-      <h2>
+    <div className={className}>
+      <h2 className={styles.heading}>
         {comments.length === 0
           ? "No Comments yet"
           : `Comments (${comments.length})`}
@@ -63,12 +67,18 @@ const CommentSection = ({
           mutate={handleCreate}
           error={createComment.error}
           isLoading={createComment.isLoading}
+          className={styles.form}
         />
       ) : (
-        <div>You must be logged in to comment</div>
+        <Alert className={styles.warning}>
+          <div>
+            <TriangleAlert size={20} />
+          </div>
+          <div>You must be logged in to comment.</div>
+        </Alert>
       )}
 
-      <div>
+      <div className={comments.length > 0 ? styles.comments : null}>
         {comments.map((comment) => (
           <Comment
             comment={comment}

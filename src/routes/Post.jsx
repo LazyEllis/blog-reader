@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import { useQuery } from "../hooks/useQuery";
 import { getPost, getPostComments } from "../services/BlogService";
 import CommentSection from "../components/CommentSection";
+import styles from "../styles/Post.module.css";
 
 const Post = () => {
   const { id } = useParams();
@@ -40,16 +41,17 @@ const Post = () => {
 
   return (
     <>
-      <article>
-        <div>
-          <h1>{post.title}</h1>
-          <div>
+      <article className={styles.article}>
+        <header className={styles.header}>
+          <h1 className={styles.title}>{post.title}</h1>
+          <div className={styles.metadata}>
             <div>{format(post.createdAt, "MMM d, y")}</div>
           </div>
-        </div>
+        </header>
         <p>{post.content}</p>
       </article>
       <CommentSection
+        className={styles.comments}
         comments={comments}
         error={commentsError}
         isLoading={areCommentsLoading}
