@@ -60,3 +60,7 @@
     }
   }
 }
+
+.error {
+  margin-bottom: calc(var(--spacing) * 10);
+}

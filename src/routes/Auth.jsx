@@ -71,7 +71,7 @@ const Auth = ({ isSignUp }) => {
       <h1 className={styles.heading}>{isSignUp ? "Sign up" : "Sign in"}</h1>
 
       <div className={styles.formContainer}>
-        {error && <ErrorAlert errors={error} />}
+        {error && <ErrorAlert errors={error} className={styles.error} />}
 
         <form onSubmit={handleSubmit}>
           {fields.map(({ label, name, type }) => (
