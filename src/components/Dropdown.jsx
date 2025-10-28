@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef, useContext, createContext } from "react";
+import { useState, useRef, useContext, createContext } from "react";
+import { useOutsideClick } from "../hooks/useOutsideClick";
 import { classNames } from "../lib/utils";
 import styles from "../styles/Dropdown.module.css";
 
@@ -13,18 +14,7 @@ export const Menu = ({ className = "", children }) => {
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
+  useOutsideClick(menuRef, () => setIsOpen(false));
 
   return (
     <MenuContext value={{ isOpen, toggleMenu }}>

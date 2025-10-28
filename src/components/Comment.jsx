@@ -101,7 +101,7 @@ const Comment = ({
           </div>
           <div className={styles.content}>{comment.content}</div>
           {isDeleting && (
-            <Dialog>
+            <Dialog onClose={onCancel}>
               <div className={styles.dialogBody}>
                 <div className={styles.alertIconContainer}>
                   <TriangleAlert size={24} />

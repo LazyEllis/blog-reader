@@ -1,15 +1,24 @@
+import { useRef } from "react";
+import { useOutsideClick } from "../hooks/useOutsideClick";
 import styles from "../styles/Dialog.module.css";
 
-const Dialog = ({ children }) => (
-  <dialog className={styles.dialog} open>
-    <div className={styles.backdrop}></div>
+const Dialog = ({ onClose, children }) => {
+  const panelRef = useRef(null);
+  useOutsideClick(panelRef, onClose);
 
-    <div className={styles.panelOuter}>
-      <div className={styles.panelInner}>
-        <div className={styles.panel}>{children}</div>
+  return (
+    <dialog className={styles.dialog} open>
+      <div className={styles.backdrop}></div>
+
+      <div className={styles.panelOuter}>
+        <div className={styles.panelInner}>
+          <div className={styles.panel} ref={panelRef}>
+            {children}
+          </div>
+        </div>
       </div>
-    </div>
-  </dialog>
-);
+    </dialog>
+  );
+};
 
 export default Dialog;
