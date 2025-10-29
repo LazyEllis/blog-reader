@@ -3,6 +3,7 @@ import { MessageCircle } from "lucide-react";
 import { format } from "date-fns";
 import { useQuery } from "../hooks/useQuery";
 import { listPosts } from "../services/BlogService";
+import ErrorAlert from "../components/ErrorAlert";
 import styles from "../styles/Home.module.css";
 
 const Home = () => {
@@ -10,7 +11,7 @@ const Home = () => {
 
   if (isLoading) return <div>Loading...</div>;
 
-  if (error) return <div>{error.message}</div>;
+  if (error) return <ErrorAlert error={error} isRouteError={true} />;
 
   return (
     <>

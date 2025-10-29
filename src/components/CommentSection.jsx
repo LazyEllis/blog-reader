@@ -7,6 +7,7 @@ import { createPostComment } from "../services/BlogService";
 import CommentForm from "./CommentForm";
 import Comment from "./Comment";
 import Alert from "./Alert";
+import ErrorAlert from "./ErrorAlert";
 import styles from "../styles/CommentSection.module.css";
 
 const CommentSection = ({
@@ -51,7 +52,11 @@ const CommentSection = ({
   }
 
   if (error) {
-    return <div>{error.message}</div>;
+    return (
+      <div className={className}>
+        <ErrorAlert error={error} />
+      </div>
+    );
   }
 
   return (

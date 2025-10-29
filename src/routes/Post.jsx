@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import { useQuery } from "../hooks/useQuery";
 import { getPost, getPostComments } from "../services/BlogService";
 import CommentSection from "../components/CommentSection";
+import ErrorAlert from "../components/ErrorAlert";
 import styles from "../styles/Post.module.css";
 
 const Post = () => {
@@ -37,7 +38,7 @@ const Post = () => {
 
   if (isLoadingPost) return <div>Loading...</div>;
 
-  if (postError) return <div>{postError.message}</div>;
+  if (postError) return <ErrorAlert error={postError} isRouteError={true} />;
 
   return (
     <>

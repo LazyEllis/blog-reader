@@ -3,8 +3,14 @@ import { classNames } from "../lib/utils";
 import Alert from "./Alert";
 import styles from "../styles/ErrorAlert.module.css";
 
-const ErrorAlert = ({ className, error }) => (
-  <Alert className={classNames(styles.alert, className)}>
+const ErrorAlert = ({ error, className, isRouteError }) => (
+  <Alert
+    className={classNames(
+      styles.alert,
+      isRouteError ? styles.routeError : null,
+      className,
+    )}
+  >
     <div className={styles.iconContainer}>
       <CircleX size={20} />
     </div>
