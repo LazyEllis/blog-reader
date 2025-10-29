@@ -8,7 +8,7 @@ const MenuContext = createContext({
   toggleMenu: () => {},
 });
 
-export const Menu = ({ className = "", children }) => {
+export const Menu = ({ className, children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
 

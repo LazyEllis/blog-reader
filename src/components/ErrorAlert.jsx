@@ -3,27 +3,27 @@ import { classNames } from "../lib/utils";
 import Alert from "./Alert";
 import styles from "../styles/ErrorAlert.module.css";
 
-const ErrorAlert = ({ className = "", errors }) => (
+const ErrorAlert = ({ className, error }) => (
   <Alert className={classNames(styles.alert, className)}>
     <div className={styles.iconContainer}>
       <CircleX size={20} />
     </div>
     <div>
-      {Array.isArray(errors) ? (
+      {Array.isArray(error) ? (
         <>
           <p className={styles.heading}>
-            {errors.length === 1
+            {error.length === 1
               ? "There is an error in your submission"
-              : `There are ${errors.length} errors in your submission`}
+              : `There are ${error.length} errors in your submission`}
           </p>
           <ul className={styles.errorList}>
-            {errors.map((error, index) => (
-              <li key={index}>{error.msg}</li>
+            {error.map((err, index) => (
+              <li key={index}>{err.msg}</li>
             ))}
           </ul>
         </>
       ) : (
-        <span className={styles.message}>{errors.message}</span>
+        <span className={styles.message}>{error.message}</span>
       )}
     </div>
   </Alert>

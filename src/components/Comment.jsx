@@ -116,7 +116,7 @@ const Comment = ({
 
                   {deleteComment.error && (
                     <ErrorAlert
-                      errors={deleteComment.error}
+                      error={deleteComment.error}
                       className={styles.error}
                     />
                   )}

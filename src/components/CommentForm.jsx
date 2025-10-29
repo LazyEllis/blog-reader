@@ -27,7 +27,7 @@ const CommentForm = ({
 
   return (
     <div className={className}>
-      {error && <ErrorAlert className={styles.error} errors={error} />}
+      {error && <ErrorAlert className={styles.error} error={error} />}
 
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.textareaContainer}>

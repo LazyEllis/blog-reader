@@ -16,7 +16,7 @@ const CommentSection = ({
   onCreate,
   onUpdate,
   onDelete,
-  className = null,
+  className,
 }) => {
   const { token } = useToken();
   const { id } = useParams();
