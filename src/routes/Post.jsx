@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { useQuery } from "../hooks/useQuery";
-import { getPost, getPostComments } from "../services/BlogService";
+import { getPost, getPostComments } from "../lib/BlogService";
 import CommentSection from "../components/CommentSection";
 import ErrorAlert from "../components/ErrorAlert";
 import Loader from "../components/Loader";

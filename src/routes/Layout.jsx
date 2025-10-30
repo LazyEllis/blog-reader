@@ -1,7 +1,7 @@
 import { Link, Outlet } from "react-router-dom";
 import { useQuery } from "../hooks/useQuery";
 import { useToken } from "../hooks/useToken";
-import { getProfile } from "../services/BlogService";
+import { getProfile } from "../lib/BlogService";
 import styles from "../styles/Layout.module.css";
 import NavMenu from "../components/NavMenu";
 

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { MessageCircle } from "lucide-react";
 import { format } from "date-fns";
 import { useQuery } from "../hooks/useQuery";
-import { listPosts } from "../services/BlogService";
+import { listPosts } from "../lib/BlogService";
 import ErrorAlert from "../components/ErrorAlert";
 import Loader from "../components/Loader";
 import styles from "../styles/Home.module.css";

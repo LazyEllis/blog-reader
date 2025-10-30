@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useMutation } from "../hooks/useMutation";
 import { useToken } from "../hooks/useToken";
-import { createUser, generateToken } from "../services/BlogService";
+import { createUser, generateToken } from "../lib/BlogService";
 import Input from "../components/Input";
 import ErrorAlert from "../components/ErrorAlert";
 import styles from "../styles/Auth.module.css";

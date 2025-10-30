@@ -2,7 +2,7 @@ import { useOutletContext, useParams } from "react-router-dom";
 import { Ellipsis, TriangleAlert } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { useMutation } from "../hooks/useMutation";
-import { deletePostComment, updatePostComment } from "../services/BlogService";
+import { deletePostComment, updatePostComment } from "../lib/BlogService";
 import { Menu, MenuButton, MenuItems, MenuItem } from "./Dropdown";
 import CommentForm from "./CommentForm";
 import ErrorAlert from "./ErrorAlert";

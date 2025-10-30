@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { TriangleAlert } from "lucide-react";
 import { useToken } from "../hooks/useToken";
 import { useMutation } from "../hooks/useMutation";
-import { createPostComment } from "../services/BlogService";
+import { createPostComment } from "../lib/BlogService";
 import CommentForm from "./CommentForm";
 import Comment from "./Comment";
 import Alert from "./Alert";
