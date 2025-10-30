@@ -8,6 +8,7 @@ import CommentForm from "./CommentForm";
 import Comment from "./Comment";
 import Alert from "./Alert";
 import ErrorAlert from "./ErrorAlert";
+import Loader from "./Loader";
 import styles from "../styles/CommentSection.module.css";
 
 const CommentSection = ({
@@ -47,9 +48,12 @@ const CommentSection = ({
     );
   };
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  if (isLoading)
+    return (
+      <div className={`${className} ${styles.centered}`}>
+        <Loader />
+      </div>
+    );
 
   if (error) {
     return (

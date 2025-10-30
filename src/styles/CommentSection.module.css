@@ -1,3 +1,11 @@
+.centered {
+  display: flex;
+
+  > * {
+    margin: auto;
+  }
+}
+
 .heading {
   font-size: 1.25rem;
   font-weight: 700;

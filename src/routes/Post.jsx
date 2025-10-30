@@ -4,6 +4,7 @@ import { useQuery } from "../hooks/useQuery";
 import { getPost, getPostComments } from "../services/BlogService";
 import CommentSection from "../components/CommentSection";
 import ErrorAlert from "../components/ErrorAlert";
+import Loader from "../components/Loader";
 import styles from "../styles/Post.module.css";
 
 const Post = () => {
@@ -36,7 +37,7 @@ const Post = () => {
     setComments(comments.filter((comment) => comment.id !== deletedComment.id));
   };
 
-  if (isLoadingPost) return <div>Loading...</div>;
+  if (isLoadingPost) return <Loader isRouteLoader={true} />;
 
   if (postError) return <ErrorAlert error={postError} isRouteError={true} />;
 

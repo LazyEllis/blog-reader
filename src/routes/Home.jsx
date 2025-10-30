@@ -4,12 +4,13 @@ import { format } from "date-fns";
 import { useQuery } from "../hooks/useQuery";
 import { listPosts } from "../services/BlogService";
 import ErrorAlert from "../components/ErrorAlert";
+import Loader from "../components/Loader";
 import styles from "../styles/Home.module.css";
 
 const Home = () => {
   const { data: posts, error, isLoading } = useQuery({ queryFn: listPosts });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader isRouteLoader={true} />;
 
   if (error) return <ErrorAlert error={error} isRouteError={true} />;
 

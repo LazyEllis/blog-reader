@@ -38,8 +38,10 @@ body,
   height: 100%;
 }
 
-body {
+#root {
   font-family: "Inter";
+  display: flex;
+  flex-direction: column;
 }
 
 .sr-only {
