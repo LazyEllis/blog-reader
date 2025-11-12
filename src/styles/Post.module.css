@@ -31,3 +31,7 @@
   color: var(--color-accent);
   margin-top: 12px;
 }
+
+.content > * {
+  all: revert;
+}

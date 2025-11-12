@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { useQuery } from "../hooks/useQuery";
 import { getPost, getPostComments } from "../lib/BlogService";
+import parse from "html-react-parser";
 import CommentSection from "../components/CommentSection";
 import ErrorAlert from "../components/ErrorAlert";
 import Loader from "../components/Loader";
@@ -50,7 +51,7 @@ const Post = () => {
             <div>{format(post.createdAt, "MMM d, y")}</div>
           </div>
         </header>
-        <p>{post.content}</p>
+        <div className={styles.content}>{parse(post.content)}</div>
       </article>
       <CommentSection
         className={styles.comments}
